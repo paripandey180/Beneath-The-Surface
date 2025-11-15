@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneath the Surface: The Real Shark Story</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Beneath the Surface</h1>
+            <p class="tagline">Separating myth from reality in shark conservation</p>
+        </div>
+        <div class="wave-divider"></div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="introduction">
+        <div class="container">
+            <h2>The Misconception</h2>
+            <p class="lead">
+                When most people think of sharks, they imagine danger—a menacing predator lurking beneath 
+                the waves. Popular media has painted sharks as humanity's aquatic adversary, but the data 
+                tells a profoundly different story.
+            </p>
+            <p>
+                Through comprehensive analysis of global shark populations, human-shark interactions, and 
+                fishing mortality data, we reveal an uncomfortable truth: while we fear sharks, they have 
+                far more reason to fear us. This project examines the real numbers behind shark conservation 
+                and challenges the narrative that has dominated our cultural consciousness for decades.
+            </p>
+        </div>
+    </section>
+
+    <!-- Visualization 1: Choropleth Map -->
+    <section class="visualization-section" id="section-choropleth">
+        <div class="container">
+            <div class="section-header">
+                <h2>Regional Shark Mortality Distribution</h2>
+            </div>
+            
+            <p class="viz-description">
+                The global distribution of shark fishing mortality reveals critical hotspots where 
+                shark populations face the greatest threat between 2012 and 2019.
+            </p>
+
+            <!-- Choropleth Map Visualization Container -->
+            <div class="viz-container" id="choropleth-map">
+                <div class="viz-placeholder">
+                    <div class="placeholder-icon">🗺️</div>
+                    <p>Regional Shark Mortality Distribution</p>
+                    <span class="viz-type">Choropleth Map</span>
+                </div>
+            </div>
+
+            <div class="data-source">
+                <strong>Data Source:</strong> Global Shark Fishing Mortality Estimates (2012–2019)
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="team-info">
+                <h3>Project Team</h3>
+                <p>
+                    Pari Pandey • Franz Benedict Villamin • Craig Seward • 
+                    Gabriel Kessler • Rounak Sharma
+                </p>
+                <p class="course-info">CSE 478: Foundations of Data Visualization | Arizona State University</p>
+            </div>
+            <div class="data-sources">
+                <h4>Data Sources</h4>
+                <ul>
+                    <li><a href="#" target="_blank">Global Shark Fishing Mortality Estimates (2012–2019)</a></li>
+                    <li><a href="#" target="_blank">Global Shark Attack File (GSAF)</a></li>
+                    <li><a href="#" target="_blank">California Shark Incidents (1950-2022)</a></li>
+                    <li><a href="#" target="_blank">SharkBase Database</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load main script -->
+    <script src="script.js"></script>
+</body>
+</html>
