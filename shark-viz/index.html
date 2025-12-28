@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shark Tales - A Data Story</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="loading">Loading shark...</div>
+    <div id="dark-overlay"></div>
+    
+    <div class="rays"><div></div></div>
+    
+    <div class="lights">
+        <div class="light" style="top: 10%; left: 25%; --d: 0ms;"></div>
+        <div class="light" style="top: 40%; left: 12%; --d: 200ms;"></div>
+        <div class="light" style="top: 60%; left: 18%; --d: 350ms;"></div>
+        <div class="light" style="top: 25%; left: 66%; --d: 600ms;"></div>
+        <div class="light" style="top: 43%; left: 55%; --d: 1210ms;"></div>
+        <div class="light" style="top: 90%; left: 37%; --d: 420ms;"></div>
+        <div class="light" style="top: 82%; left: 91%; --d: 1100ms;"></div>
+        <div class="light" style="top: 67%; left: 81%; --d: 1560ms;"></div>
+    </div>
+    
+    <div class="vignette"></div>
+    <div id="canvas-container"></div>
+    <div class="bubbles-container" id="bubbles"></div>
+    
+    <div class="scenes">
+        <section class="scene" data-scene="0"><div class="scene-text"><p>Beneath the surface</p></div></section>
+        <section class="scene" data-scene="1"><div class="scene-text"><p>an apex predator lurks nearby</p></div></section>
+        <section class="scene" data-scene="2"><div class="scene-text"><p>hunting for its prey</p></div></section>
+        <section class="scene" data-scene="3"><div class="scene-text"><p>but just like us</p></div></section>
+        <section class="scene" data-scene="4"><div class="scene-text"><p>it's just trying to survive</p></div></section>
+        
+        <section class="scene" data-scene="5"><div class="scene-text"><p>For 450 million years</p></div></section>
+        <section class="scene" data-scene="6"><div class="scene-text"><p>sharks have roamed our oceans</p></div></section>
+        <section class="scene" data-scene="7"><div class="scene-text"><p>They are not monsters</p></div></section>
+        <section class="scene" data-scene="8"><div class="scene-text"><p>just creatures built to survive</p></div></section>
+        <section class="scene" data-scene="9"><div class="scene-text"><p>Misconceptions lead to fear</p><p>fear leads to destruction</p></div></section>
+        <section class="scene" data-scene="10"><div class="scene-text"><p>But the truth is far more beautiful</p></div></section>
+        <section class="scene" data-scene="11"><div class="scene-text"><p>Sharks shape the balance of the sea</p></div></section>
+        <section class="scene" data-scene="12"><div class="scene-text"><p>Their skeletons made of cartilage</p><p>fast, flexible, efficient</p></div></section>
+        <section class="scene" data-scene="13"><div class="scene-text"><p>They are indicator species</p><p>their presence signals a healthy ocean</p></div></section>
+        <section class="scene" data-scene="14"><div class="scene-text"><p>By hunting the weak and sick</p><p>they prevent disease</p></div></section>
+        <section class="scene" data-scene="15"><div class="scene-text"><p>and protect biodiversity</p></div></section>
+        <section class="scene" data-scene="16"><div class="scene-text"><p>When sharks thrive</p><p>the entire ocean thrives</p></div></section>
+
+        <section class="scene" data-scene="17"><div class="scene-text"><p>Yet at the surface</p></div></section>
+        <section class="scene" data-scene="18"><div class="scene-text"><p>their world collides with ours</p></div></section>
+        <section class="scene" data-scene="19"><div class="scene-text"><p>Climate change has pushed sharks</p><p>into new geographic regions</p></div></section>
+        <section class="scene" data-scene="20"><div class="scene-text"><p>Increased fishing, tourism</p><p>and coastal activities</p></div></section>
+        <section class="scene" data-scene="21"><div class="scene-text"><p>have led to a rise in</p><p>human-shark encounters</p></div></section>
+        <section class="scene" data-scene="22"><div class="scene-text"><p>These encounters fuel</p><p>fear, fascination, and misunderstanding</p></div></section>
+        
+        <!-- SIGHTINGS: Text intro -->
+        <section class="scene" data-scene="23">
+            <div class="scene-text"><p>But the data tells a different story</p><p>Shark sightings have increased</p><p>as more humans enter their waters</p></div>
+        </section>
+        
+        <!-- SIGHTINGS: Visualization only -->
+        <section class="scene viz-scene" data-scene="24">
+            <div class="viz-container viz-fullscreen" id="sightings-viz">
+                <div class="viz-title">Shark Sightings Over Time</div>
+                <div id="sightings-chart"></div>
+            </div>
+        </section>
+        
+        <!-- BODY MAP: Text intro -->
+        <section class="scene" data-scene="25">
+            <div class="scene-text"><p>When sharks do encounter humans</p><p>where do they strike?</p></div>
+        </section>
+        
+        <!-- BODY MAP: Visualization only -->
+        <section class="scene viz-scene" data-scene="26">
+            <div class="viz-container viz-fullscreen" id="bodymap-viz">
+                <div id="bodymap-wrapper">
+                    <div class="bodymap-container" id="bodymap-root">
+                        <div class="bm-section-header">
+                            <h3>Incident Body Map</h3>
+                            <p class="bm-section-subtitle">Mapping shark encounters to the human body as coastal populations grow</p>
+                        </div>
+                        <div class="bm-layout">
+                            <div class="bm-main-display">
+                                <div class="bm-human-column">
+                                    <div class="bm-column-label">US Coastal Population</div>
+                                    <div class="bm-human-wrapper">
+                                        <svg id="bm-human-svg" viewBox="0 0 200 400"></svg>
+                                    </div>
+                                    <div class="bm-population" id="bm-population">--</div>
+                                </div>
+                                <div class="bm-surfboard-column">
+                                    <div class="bm-column-label">Risk Per Million</div>
+                                    <div class="bm-surfboard-wrapper">
+                                        <img src="assets/images/surfboard.png" alt="Surfboard" id="bm-surfboard-img">
+                                        <div class="bm-surfboard-rate">
+                                            <span class="bm-rate-number" id="bm-rate-number">--</span>
+                                            <span class="bm-rate-label">per million</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bm-stats-column">
+                                    <div class="bm-year-display">
+                                        <span class="bm-year-number" id="bm-year">1980</span>
+                                    </div>
+                                    <div class="bm-stats-grid">
+                                        <div class="bm-stat-card">
+                                            <div class="bm-stat-value" id="bm-total">--</div>
+                                            <div class="bm-stat-label">Total Incidents</div>
+                                        </div>
+                                        <div class="bm-stat-card fatal">
+                                            <div class="bm-stat-value" id="bm-fatal">--</div>
+                                            <div class="bm-stat-label">Fatal</div>
+                                        </div>
+                                        <div class="bm-stat-card nonfatal">
+                                            <div class="bm-stat-value" id="bm-nonfatal">--</div>
+                                            <div class="bm-stat-label">Non-Fatal</div>
+                                        </div>
+                                    </div>
+                                    <div class="bm-insight-box">
+                                        <p>As population grows, raw incident numbers increase—but the <strong>rate stays stable</strong>, proving sharks aren't becoming more dangerous.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bm-controls-section">
+                                <div class="bm-legend-bar">
+                                    <span class="bm-legend-title">Body Region:</span>
+                                    <div id="bm-legend"></div>
+                                </div>
+                                <div class="bm-slider-container">
+                                    <div class="bm-slider-row">
+                                        <span class="bm-year-label">1980</span>
+                                        <input type="range" id="bm-year-slider" min="1980" max="2019" value="1980" step="1">
+                                        <span class="bm-year-label">2019</span>
+                                    </div>
+                                    <div class="bm-slider-buttons">
+                                        <button id="bm-play" class="bm-control-btn">▶ Play</button>
+                                        <button id="bm-reset" class="bm-control-btn secondary">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INCIDENTS: Text intro -->
+        <section class="scene" data-scene="27">
+            <div class="scene-text"><p>The ocean holds us both</p><p>curiosity meets caution</p></div>
+        </section>
+        
+        <!-- INCIDENTS: Visualization only -->
+        <section class="scene viz-scene" data-scene="28">
+            <div class="viz-container viz-fullscreen" id="incidents-viz">
+                <div class="viz-title">California Shark Incidents by Activity</div>
+                <div id="vis6-container"></div>
+                <div id="vis6-tooltip"></div>
+            </div>
+        </section>
+        
+        <!-- BUBBLE CHART: Text intro -->
+        <section class="scene" data-scene="29">
+            <div class="scene-text"><p>Not every shark meets us equally</p><p>see the incidents by species</p></div>
+        </section>
+        
+        <!-- BUBBLE CHART: Visualization only -->
+        <section class="scene viz-scene" data-scene="30">
+            <div class="viz-container viz-fullscreen" id="bubble-viz">
+                <div class="viz-title">Shark Incidents by Species</div>
+                <div id="bubble-chart-wrapper">
+                    <div id="bubble-chart-container">
+                        <div class="toggle-container">
+                            <span class="toggle-label fatal-label active">Fatal</span>
+                            <div id="bubble-toggle" class="toggle-switch"></div>
+                            <span class="toggle-label non-fatal-label">Non-fatal</span>
+                        </div>
+                        <div id="bubble-chart"></div>
+                        <div id="bubble-tooltip" class="bubble-tooltip"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="31"><div class="scene-text"><p>Humans pose a far greater threat</p><p>to sharks than sharks do to us</p></div></section>
+
+        <section class="scene" data-scene="32">
+            <div class="scene-text"><p>Yet misconceptions persist</p></div>
+            <div class="myth-bubbles">
+                <div class="myth-bubble" style="--delay: 0.2s; top: 20%; left: 10%;">"Sharks are mindless killers"</div>
+                <div class="myth-bubble" style="--delay: 0.5s; top: 65%; left: 60%;">"Sharks target humans"</div>
+                <div class="myth-bubble" style="--delay: 0.8s; top: 35%; left: 55%;">"All sharks are dangerous"</div>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="33">
+            <div class="scene-text"><p>Fueled by media sensationalism</p><p>and a primal fear of the unknown</p></div>
+            <div class="myth-bubbles">
+                <div class="myth-bubble" style="--delay: 0s; top: 25%; left: 55%;">"Shark attacks are common"</div>
+                <div class="myth-bubble" style="--delay: 0.3s; top: 60%; left: 8%;">"Sharks can smell blood from miles away"</div>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="34">
+            <div class="scene-text"><p>But the truth tells a different story</p></div>
+            <div class="debunk-facts">
+                <div class="debunk-item">
+                    <span class="myth-crossed">"Mindless killers"</span>
+                    <span class="fact">→ Intelligent, curious creatures</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="35">
+            <div class="scene-text"></div>
+            <div class="debunk-facts">
+                <div class="debunk-item">
+                    <span class="myth-crossed">"Sharks target humans"</span>
+                    <span class="fact">→ Humans are not on their menu</span>
+                </div>
+                <div class="debunk-item" style="margin-top: 1rem;">
+                    <span class="myth-crossed">"Attacks are common"</span>
+                    <span class="fact">→ ~5 fatal attacks per year globally</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="36">
+            <div class="scene-text">
+                <p>You're more likely to be killed by</p>
+                <p>a vending machine, lightning, or a cow</p>
+            </div>
+        </section>
+
+        <section class="scene" data-scene="37"><div class="scene-text"><p>Meanwhile, every year</p></div></section>
+        
+        <section class="scene" data-scene="38">
+            <div class="scene-text">
+                <p>humans kill</p>
+                <span class="stat impact-stat">100 million</span>
+                <p>sharks</p>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="39">
+            <div class="scene-text"><p>For their fins</p></div>
+            <div id="fishing-net"></div>
+        </section>
+        
+        <section class="scene" data-scene="40"><div class="scene-text"><p>For sport</p></div></section>
+        <section class="scene" data-scene="41"><div class="scene-text"><p>Out of fear</p></div></section>
+        
+        <section class="scene" data-scene="42">
+            <div class="scene-text">
+                <p>Overfishing has caused a</p>
+                <span class="stat">71%</span>
+                <p>decline in oceanic sharks since 1970</p>
+            </div>
+        </section>
+        
+        <section class="scene" data-scene="43"><div class="scene-text"><p>pushing some species</p><p>to extinction</p></div></section>
+        
+        <!-- MORTALITY: Text intro -->
+        <section class="scene" data-scene="44">
+            <div class="scene-text">
+                <p>Regulations rise and fall</p>
+                <p>global mortality keeps score</p>
+            </div>
+        </section>
+        
+        <!-- MORTALITY: Visualization only -->
+        <section class="scene viz-scene" data-scene="45">
+            <div class="viz-container viz-fullscreen" id="mortality-viz">
+                <div class="viz-title">Global Shark Mortality vs Regulations</div>
+                <div id="GlobalMortChart"></div>
+                <div id="chart-container"></div>
+            </div>
+        </section>
+        
+        <!-- CHOROPLETH: Text intro -->
+        <section class="scene" data-scene="46">
+            <div class="scene-text">
+                <p>Human pressure stretches worldwide</p>
+                <p>every coastline tells a story</p>
+            </div>
+        </section>
+        
+        <!-- CHOROPLETH: Visualization only -->
+        <section class="scene viz-scene" data-scene="47">
+            <div class="viz-container viz-fullscreen choropleth-wrapper" id="choropleth-viz">
+                <div class="viz-title">Global Shark Mortality by Region</div>
+                <div id="choropleth-map"></div>
+            </div>
+        </section>
+
+        <section class="scene" data-scene="48"><div class="scene-text"><p>The ocean needs them</p></div></section>
+        <section class="scene" data-scene="49"><div class="scene-text"><p>and so do we</p></div></section>
+        <section class="scene" data-scene="50"><div class="scene-text"><h2>Protect the sharks</h2><p>protect the ocean</p><p>protect our future</p></div></section>
+    </div>
+    
+    <div class="scroll-indicator"><span>Scroll</span><span class="arrow">↓</span></div>
+    <div id="bm-tooltip"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    
+    <script src="js/bubbleViz.js"></script>
+    <script src="js/sightings.js"></script>
+    <script src="js/mortality.js"></script>
+    <script src="js/radialChart.js"></script>
+    <script src="js/choropleth.js"></script>
+    <script src="js/bodyMap.js"></script>
+    
+    <script type="importmap">
+        { "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }}
+    </script>
+    
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
