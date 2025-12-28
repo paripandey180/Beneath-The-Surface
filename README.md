@@ -1,4 +1,5 @@
 # 🦈 Beneath The Surface
+![alt text](<Beneath the Surface Poster.png>)
 
 ## 👥 Collaborators
 1. Pari Pandey
@@ -68,6 +69,7 @@ S.No | Visualization  | Dataset	Type | Type | What It Shows | Interaction |
 
 
 ## 💡 Innovative Visualization
+![alt text](<Body Map.png>)
 **Incident Trends Over Time – Human Body Map**<br>
 Maps incident concentration to body regions on a scalable human silhouette, scaled by coastal population over time.
 
